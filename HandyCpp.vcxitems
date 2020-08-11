@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{13cc4c0a-f2fa-493b-843e-eb220880f87e}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\stb_image.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyConsole.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyGuid.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyPacket.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandySHA1.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Handy.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyArgs.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyBase.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyCalamity.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyCompat.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyDeque.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyEncoding.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyExtended.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyFile.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyHash.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyLoader.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyMath.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyMemory.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyMMFile.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyPIMPL.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyRange.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyResult.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandySerDe.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyString.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyThreadUtils.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyTryGet.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyUtils.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\Line2.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\LineClipping.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Base.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\BitContinuum.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Conversions.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Matrix3.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Matrix4.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Popcount.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\RGB888.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\RGBA8888.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector2.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector2d.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector2i.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector3.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector3d.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector3i.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector4.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector4d.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Vector4i.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\AABB2.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\AABB2d.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\AABB2i.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\AABB3.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\Functions.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\IProjection.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\LineSimplification.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\Maps.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\OrthoFrame3.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\OrthoProjection.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\PerspectiveProjection.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\Xform3.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Docs\HandyMMFile.md" />
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_assert" />
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_byte" />
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_util" />
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\span" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="$(MSBuildThisFileDirectory)Hints.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)Handy.cpp" />
+  </ItemGroup>
+</Project>

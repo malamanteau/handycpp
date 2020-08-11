@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HandyMathTest", "HandyMathTest.vcxproj", "{535EC311-D59F-4971-B7F5-5BD9166EA794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|ARM.ActiveCfg = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|ARM.Build.0 = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|x64.ActiveCfg = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|x64.Build.0 = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|x86.ActiveCfg = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Debug|x86.Build.0 = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Release|ARM.ActiveCfg = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Release|x64.ActiveCfg = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Release|x64.Build.0 = Release|x64
+		{535EC311-D59F-4971-B7F5-5BD9166EA794}.Release|x86.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E5EF769-2AD9-47B8-A7D6-6AEB21B89A79}
+	EndGlobalSection
+EndGlobal

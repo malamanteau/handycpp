@@ -1,0 +1,727 @@
+
+/// =============================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+///
+/// GSL (https://github.com/microsoft/GSL)
+/// 
+/// Copyright (c) 2015 Microsoft Corporation. All rights reserved. 
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+///
+/// =============================================================================
+
+/// ========================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+/// 
+/// TCLAP (http://tclap.sourceforge.net/)
+///
+/// Copyright (c) 2003 Michael E. Smoot 
+/// Copyright (c) 2004 Daniel Aarno
+/// Copyright (c) 2017 Google Inc.
+///
+/// Permission is hereby granted, free of charge, to any person 
+/// obtaining a copy of this software and associated documentation 
+/// files (the "Software"), to deal in the Software without restriction, 
+/// including without limitation the rights to use, copy, modify, merge, 
+/// publish, distribute, sublicense, and/or sell copies of the Software, 
+/// and to permit persons to whom the Software is furnished to do so, 
+/// subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be 
+/// included in all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+/// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+/// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+/// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
+/// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN 
+/// AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+/// IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+/// THE SOFTWARE.
+/// ========================================================================
+
+/// ========================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+/// 
+/// SHA1
+/// Copyright (c) 2015, Damian Barczynski <daan.net@wp.eu>
+///
+/// Permission is hereby granted, free of charge, to any person 
+/// obtaining a copy of this software and associated documentation 
+/// files (the "Software"), to deal in the Software without restriction, 
+/// including without limitation the rights to use, copy, modify, merge, 
+/// publish, distribute, sublicense, and/or sell copies of the Software, 
+/// and to permit persons to whom the Software is furnished to do so, 
+/// subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be 
+/// included in all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+/// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+/// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+/// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
+/// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN 
+/// AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+/// IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 
+/// THE SOFTWARE.
+/// ========================================================================
+
+/// ========================================================================
+/// UNLICENSE
+/// 
+/// stb_image (https://github.com/nothings/stb)
+/// Sean Barrett
+/// 
+/// This is free and unencumbered software released into the public domain.
+/// Anyone is free to copy, modify, publish, use, compile, sell, or
+/// distribute this software, either in source code form or as a compiled
+/// binary, for any purpose, commercial or non-commercial, and by any
+/// means.
+///
+/// In jurisdictions that recognize copyright laws, the author or authors
+/// of this software dedicate any and all copyright interest in the
+/// software to the public domain. We make this dedication for the benefit
+/// of the public at large and to the detriment of our heirs and
+/// successors. We intend this dedication to be an overt act of
+/// relinquishment in perpetuity of all present and future rights to this
+/// software under copyright law.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+/// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+/// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+/// IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+/// OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+/// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+/// OTHER DEALINGS IN THE SOFTWARE.
+///
+/// For more information, please refer to <http://unlicense.org/>
+/// ========================================================================
+
+/// ========================================================================
+/// UNLICENSE
+/// 
+/// cfgpath (https://github.com/Malvineous/cfgpath)
+/// Adam Nielsen <malvineous@shikadi.net>
+/// 
+/// This is free and unencumbered software released into the public domain.
+/// Anyone is free to copy, modify, publish, use, compile, sell, or
+/// distribute this software, either in source code form or as a compiled
+/// binary, for any purpose, commercial or non-commercial, and by any
+/// means.
+///
+/// In jurisdictions that recognize copyright laws, the author or authors
+/// of this software dedicate any and all copyright interest in the
+/// software to the public domain. We make this dedication for the benefit
+/// of the public at large and to the detriment of our heirs and
+/// successors. We intend this dedication to be an overt act of
+/// relinquishment in perpetuity of all present and future rights to this
+/// software under copyright law.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+/// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+/// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+/// IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+/// OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+/// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+/// OTHER DEALINGS IN THE SOFTWARE.
+///
+/// For more information, please refer to <http://unlicense.org/>
+/// ========================================================================
+
+/// =============================================================================
+/// LICENSE: Boost Software License - Version 1.0
+///
+/// libloading (https://github.com/mrpi/libloading)
+///
+/// Copyright Ludger Sprenker 2004 - 2006.
+///
+/// Boost Software License - Version 1.0
+/// Permission is hereby granted, free of charge, to any person or organization
+/// obtaining a copy of the software and accompanying documentation covered by
+/// this license (the "Software") to use, reproduce, display, distribute,
+/// execute, and transmit the Software, and to prepare derivative works of the
+/// Software, and to permit third-parties to whom the Software is furnished to
+/// do so, all subject to the following:
+/// The copyright notices in the Software and this entire statement, including
+/// the above license grant, this restriction and the following disclaimer,
+/// must be included in all copies of the Software, in whole or in part, and
+/// all derivative works of the Software, unless such copies or derivative
+/// works are solely in the form of machine-executable object code generated by
+/// a source language processor.
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+/// SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+/// FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+/// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+/// DEALINGS IN THE SOFTWARE.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: BSD 3-Clause License
+///
+///	SystemInfo Library
+/// https://github.com/poli0048/SystemInfo
+/// and Mapping functions: "Math/include/Extended/Maps.hpp"
+///
+/// Copyright (c) 2017 Sentek Systems, LLC.
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// ============================================================================================
+/// LICENSE: BSD 2-Clause "Simplified" License
+///
+/// Copyright 2010 Mikko Lehtonen. All rights reserved.
+/// 
+/// Redistribution and use in source and binary forms, with or without modification, are
+/// permitted provided that the following conditions are met:
+/// 
+///    1. Redistributions of source code must retain the above copyright notice, this list of
+///       conditions and the following disclaimer.
+/// 
+///    2. Redistributions in binary form must reproduce the above copyright notice, this list
+///       of conditions and the following disclaimer in the documentation and/or other materials
+///       provided with the distribution.
+/// 
+/// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+/// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+/// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+/// IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+/// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+/// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+/// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+/// WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+/// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+/// POSSIBILITY OF SUCH DAMAGE.
+/// ============================================================================================
+
+/// =============================================================================
+/// LICENSE: ZLIB
+///
+/// SIMD (SSE1+MMX or SSE2) implementation of sin, cos, exp and log
+///   Inspired by Intel Approximate Math library, and based on the
+///   corresponding algorithms of the cephes math library
+///   https://github.com/menzi11/sse_mathfun_extension
+///
+/// Copyright (C) 2007 Julien Pommier
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// ============================================================================================
+/// LICENSE: BSD 2-Clause "Simplified" License
+///
+/// vectorial (https://github.com/scoopr/vectorial)
+///
+/// Copyright 2010 Mikko Lehtonen. All rights reserved.
+/// 
+/// Redistribution and use in source and binary forms, with or without modification, are
+/// permitted provided that the following conditions are met:
+/// 
+///    1. Redistributions of source code must retain the above copyright notice, this list of
+///       conditions and the following disclaimer.
+/// 
+///    2. Redistributions in binary form must reproduce the above copyright notice, this list
+///       of conditions and the following disclaimer in the documentation and/or other materials
+///       provided with the distribution.
+/// 
+/// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+/// ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+/// WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+/// IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+/// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+/// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+/// PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+/// WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+/// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+/// POSSIBILITY OF SUCH DAMAGE.
+/// ============================================================================================
+
+/// =============================================================================
+/// LICENSE - BSD 2-Clause "Simplified" License 
+///     (https://opensource.org/licenses/BSD-2-Clause)
+/// 
+/// Poshlib: http://poshlib.hookatooka.com/poshlib/trac.cgi
+/// 
+/// Copyright (c) 2004-2006, Brian Hook
+/// All rights reserved.
+/// 
+/// Redistribution and use in source and binary forms, with or without
+/// modification, are permitted provided that the following conditions are met:
+/// 
+/// * Redistributions of source code must retain the above copyright notice, this
+///   list of conditions and the following disclaimer.
+/// 
+/// * Redistributions in binary form must reproduce the above copyright notice,
+///   this list of conditions and the following disclaimer in the documentation
+///   and/or other materials provided with the distribution.
+/// 
+/// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+/// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+/// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+/// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+/// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+/// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+/// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+/// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+/// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+/// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: 3-Clause BSD License
+///
+/// googletest (https://github.com/google/googletest)
+///
+/// Copyright 2005, Google Inc.
+///
+/// Redistribution and use in source and binary forms, with or without
+/// modification, are permitted provided that the following conditions are
+/// met:
+///
+///     * Redistributions of source code must retain the above copyright
+/// notice, this list of conditions and the following disclaimer.
+///     * Redistributions in binary form must reproduce the above
+/// copyright notice, this list of conditions and the following disclaimer
+/// in the documentation and/or other materials provided with the
+/// distribution.
+///     * Neither the name of Google Inc. nor the names of its
+/// contributors may be used to endorse or promote products derived from
+/// this software without specific prior written permission.
+///
+/// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+/// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+/// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+/// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+/// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+/// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+/// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+/// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+/// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+/// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+/// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+///
+/// nvidia-mesh-tools
+/// https://code.google.com/p/nvidia-mesh-tools
+/// https://github.com/castano/nvidia-mesh-tools/tree/master/src/nvcore
+///
+/// Copyright (c) 2009-2017 Ignacio Castaño
+/// Copyright (c) 2007-2009 NVIDIA Corporation
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+///
+/// =============================================================================
+
+/// =============================================================================
+/// Microsoft's implementation of std::deque, but with different tuning values
+/// Downloaded on: 9/18/2019 
+///     https://github.com/microsoft/STL/blob/master/stl/inc/deque
+///
+/// LICENSE - Apache-2.0 WITH LLVM-exception
+/// 
+/// Copyright (c) Microsoft Corporation.
+/// 
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+/// 
+/// http://www.apache.org/licenses/LICENSE-2.0
+/// 
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+/// 
+/// As an exception, if, as a result of your compiling your source code, 
+/// portions of this Software are embedded into an Object form of such 
+/// source code, you may redistribute such embedded portions in such Object 
+/// form without complying with the conditions of Sections 4(a), 4(b) and 
+/// 4(d) of the License.
+/// 
+/// In addition, if you combine or link compiled forms of this Software with 
+/// software that is licensed under the GPLv2 ("Combined Software") and if a 
+/// court of competent jurisdiction determines that the patent provision 
+/// (Section 3), the indemnity provision (Section 9) or other Section of the 
+/// License conflicts with the conditions of the GPLv2, you may retroactively 
+/// and prospectively choose to deem waived or otherwise exclude such 
+/// Section(s) of the License, but only in their entirety and only with respect 
+/// to the Combined Software.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: ZLIB
+///
+///	Base64, Base64URL, Base85_Z85, Base91_Hencke, and Base91_Rlyeh 
+///
+/// Copyright (c) 2011..2016 r-lyeh (https://github.com/r-lyeh)
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+/// 
+/// COBS, fast-hex
+/// 
+/// Copyright (c) 2010-2016 Christopher Baker <http://christopherbaker.net>
+/// Copyright (c) 2011, Jacques Fortier. All rights reserved. 
+///     https://github.com/jacquesf/COBS-Consistent-Overhead-Byte-Stuffing
+/// 
+/// Copyright (c) 2017 Zach Bjornson
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+///
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: BSD 3-Clause License
+///
+///	Shrinker (https://code.google.com/archive/p/data-shrinker/), 
+/// Base91_Hencke (http://base91.sourceforge.net/)
+///
+/// Copyright (c) 2012, Siyuan Fu (fusiyuan2010@gmail.com)
+/// Copyright (c) 2000-2006 Joachim Henke http://base91.sourceforge.net/
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE - MIT (https://opensource.org/licenses/MIT)
+/// 
+/// crossguid (https://github.com/graeme-hill/crossguid)
+/// 
+/// Copyright (c) 2014 Graeme Hill (http://graemehill.ca)
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+///
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: ZLIB
+///
+///	https://github.com/stbrumme/hash-library
+///
+/// Copyright (c) 2014,2015 Stephan Brumme. All rights reserved.
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: ZLIB
+///
+///	DrEcho (https://github.com/r-lyeh-archived/DrEcho)
+///
+/// Copyright (c) 2011..2016 r-lyeh (https://github.com/r-lyeh)
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// ============================================================================================
+/// LICENSE: Boost Software License - Version 1.0
+/// 
+/// A Smart Pointer to IMPLementation (i.e. Smart PIMPL or just SPIMPL).
+///
+/// Copyright (c) 2015 Andrey Upadyshev (oliora@gmail.com)
+/// Boost Software License - Version 1.0
+/// Permission is hereby granted, free of charge, to any person or organization
+/// obtaining a copy of the software and accompanying documentation covered by
+/// this license (the "Software") to use, reproduce, display, distribute,
+/// execute, and transmit the Software, and to prepare derivative works of the
+/// Software, and to permit third-parties to whom the Software is furnished to
+/// do so, all subject to the following:
+/// The copyright notices in the Software and this entire statement, including
+/// the above license grant, this restriction and the following disclaimer,
+/// must be included in all copies of the Software, in whole or in part, and
+/// all derivative works of the Software, unless such copies or derivative
+/// works are solely in the form of machine-executable object code generated by
+/// a source language processor.
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT
+/// SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE
+/// FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
+/// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+/// DEALINGS IN THE SOFTWARE.
+///
+/// Latest version:            https://github.com/oliora/samples/blob/master/spimpl.h
+/// Rationale and description: http://oliora.github.io/2015/12/29/pimpl-and-rule-of-zero.html
+///
+/// Version: 1.2
+/// Changes history
+/// ---------------
+/// v1.2: const correctness
+/// v1.1: auto_ptr support is disabled by default for C++17 compatibility
+/// v1.0: Released
+/// ============================================================================================
+
+/// =============================================================================
+/// LICENSE - Apache-2.0
+///
+/// cpp11-range (https://github.com/klmr/cpp11-range)
+///
+/// Generator for range-based "for" iteration. Very 
+/// similar to Python's range(x, y, z) function. 
+/// 
+/// Copyright 2012–2016 Konrad Rudolph
+/// 
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+/// 
+/// http://www.apache.org/licenses/LICENSE-2.0
+/// 
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE - Apache-2.0
+///
+/// vectorclass/version2 (https://github.com/vectorclass/version2)
+/// 
+/// Copyright 2012-2019 Agner Fog.
+/// 
+/// Licensed under the Apache License, Version 2.0 (the "License");
+/// you may not use this file except in compliance with the License.
+/// You may obtain a copy of the License at
+/// 
+/// http://www.apache.org/licenses/LICENSE-2.0
+/// 
+/// Unless required by applicable law or agreed to in writing, software
+/// distributed under the License is distributed on an "AS IS" BASIS,
+/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+/// See the License for the specific language governing permissions and
+/// limitations under the License.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE - Mozilla Public License 2.0
+///
+/// cpp-mmf (https://github.com/carlomilanesi/cpp-mmf)
+/// 
+/// Memory-Mapped File C++ Library
+/// This is a library, for the C++98 language and its successive versions, to 
+/// handle files as arrays of bytes, exploiting system calls provided by 
+/// POSIX-compliant operating systems and by Microsoft Windows.
+///
+/// Created by Carlo Milanesi
+///
+/// This Source Code Form is subject to the terms of the Mozilla Public 
+/// License, v. 2.0. If a copy of the MPL was not distributed with this 
+/// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+/// =============================================================================
+
+/// =============================================================================
+/// LICENSE: ZLIB
+///
+/// SIMD (SSE1+MMX or SSE2) implementation of sin, cos, exp and log
+///   Inspired by Intel Approximate Math library, and based on the
+///   corresponding algorithms of the cephes math library
+///   https://github.com/menzi11/sse_mathfun_extension
+///
+/// Copyright (C) 2007 Julien Pommier
+///
+/// This software is provided 'as-is', without any express or implied
+/// warranty.  In no event will the authors be held liable for any damages
+/// arising from the use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 1. The origin of this software must not be misrepresented; you must not
+///    claim that you wrote the original software. If you use this software
+///    in a product, an acknowledgment in the product documentation would be
+///    appreciated but is not required.
+/// 2. Altered source versions must be plainly marked as such, and must not be
+///    misrepresented as being the original software.
+/// 3. This notice may not be removed or altered from any source distribution.
+/// =============================================================================
+
+/// ========================================================================
+/// ALL OTHER CODE IS UNDER THE UNLICENSE AND IS PUBLIC DOMAIN:
+/// ========================================================================
+/// UNLICENSE
+/// 
+/// This is free and unencumbered software released into the public domain.
+/// Anyone is free to copy, modify, publish, use, compile, sell, or
+/// distribute this software, either in source code form or as a compiled
+/// binary, for any purpose, commercial or non-commercial, and by any
+/// means.
+///
+/// In jurisdictions that recognize copyright laws, the author or authors
+/// of this software dedicate any and all copyright interest in the
+/// software to the public domain. We make this dedication for the benefit
+/// of the public at large and to the detriment of our heirs and
+/// successors. We intend this dedication to be an overt act of
+/// relinquishment in perpetuity of all present and future rights to this
+/// software under copyright law.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+/// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+/// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+/// IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+/// OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+/// ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+/// OTHER DEALINGS IN THE SOFTWARE.
+///
+/// For more information, please refer to <http://unlicense.org/>
+/// ========================================================================
