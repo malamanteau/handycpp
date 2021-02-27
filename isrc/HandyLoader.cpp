@@ -102,72 +102,6 @@ namespace HANDY_NS {
 			}
 		};
 
-		template <class Signature>
-		class Function
-		{
-			Loader::Library * m_lib;
-
-		public:
-			Function(Loader::Library * library, std::string name)
-				: m_name(name)
-			{
-				m_lib = library;
-
-				if (library == nullptr)
-				{
-					std::stringstream ss;
-					ss << "Library is NULL, can't call function: '" << name << "'";
-
-					throw Loader::Exception(ss.str());
-				}
-
-				#if (defined(_WIN32) || defined(__WIN32__))
-
-				m_func = reinterpret_cast<Signature*>(GetProcAddress(library->_library(), name.c_str()));
-
-				if (!m_func)
-				{
-					std::stringstream err;
-					err << "Failed to Retrieve address of function '" << name << "': Windows Error #"
-						<< GetLastError() << " for library '" << library->name() << "'";
-
-					throw Loader::Exception(err.str());
-				}
-				#else
-
-				m_func = reinterpret_cast<Signature *>(dlsym(library->_library(), name.c_str()));
-
-				if (!m_func)
-				{
-					std::stringstream err;
-					err << "Failed to Retrieve address of function '" << name << "': " << dlerror() << " for library '" << library->name() << "'";
-
-					throw Loader::Exception(err.str());
-				}
-				#endif
-			}
-
-			operator Signature *() const
-			{
-				if (!m_func)
-				{
-					std::stringstream ss;
-					ss << "Function address '" << m_name + "' isn't resolved for library: '" << m_lib->name() << "'";
-
-					throw Loader::Exception(ss.str());
-				}
-
-				return m_func;
-			}
-
-			bool        isValid() const { return (bool)m_func; }
-			std::string name()    const { return m_name; }
-
-		protected:
-			Signature *       m_func;
-			std::string const m_name;
-		};
-
 		class Library
 		{
 			HMODULE     m_lib;
@@ -183,7 +117,6 @@ namespace HANDY_NS {
 
 			HMODULE const & p_library() const;
 		};
-
 
 		Library::Library(std::string name)
 			: m_name(name)
@@ -251,6 +184,74 @@ namespace HANDY_NS {
 		{
 			return m_lib;
 		}
+
+		template <class Signature>
+		class Function
+		{
+			Loader::Library * m_lib;
+
+		public:
+			Function(Loader::Library * library, std::string name)
+				: m_name(name)
+			{
+				m_lib = library;
+
+				if (library == nullptr)
+				{
+					std::stringstream ss;
+					ss << "Library is NULL, can't call function: '" << name << "'";
+
+					throw Loader::Exception(ss.str());
+				}
+
+				#if (defined(_WIN32) || defined(__WIN32__))
+
+				m_func = reinterpret_cast<Signature*>(GetProcAddress(library->p_library(), name.c_str()));
+
+				if (!m_func)
+				{
+					std::stringstream err;
+					err << "Failed to Retrieve address of function '" << name << "': Windows Error #"
+						<< GetLastError() << " for library '" << library->name() << "'";
+
+					throw Loader::Exception(err.str());
+				}
+				#else
+
+				m_func = reinterpret_cast<Signature *>(dlsym(library->p_library(), name.c_str()));
+
+				if (!m_func)
+				{
+					std::stringstream err;
+					err << "Failed to Retrieve address of function '" << name << "': " << dlerror() << " for library '" << library->name() << "'";
+
+					throw Loader::Exception(err.str());
+				}
+				#endif
+			}
+
+			operator Signature *() const
+			{
+				if (!m_func)
+				{
+					std::stringstream ss;
+					ss << "Function address '" << m_name + "' isn't resolved for library: '" << m_lib->name() << "'";
+
+					throw Loader::Exception(ss.str());
+				}
+
+				return m_func;
+			}
+
+			bool        isValid() const { return (bool)m_func; }
+			std::string name()    const { return m_name; }
+
+		protected:
+			Signature *       m_func;
+			std::string const m_name;
+		};
+
+
 
 	} // Loader
 
