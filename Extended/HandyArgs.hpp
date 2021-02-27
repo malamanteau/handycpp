@@ -53,8 +53,8 @@
 #include <iostream>
 #include <algorithm>
 
-#include "HandyBase.hpp"
-#include "HandyString.hpp"
+#include "../HandyBase.hpp"
+#include "../HandyString.hpp"
 
 // If Microsoft has already typedef'd wchar_t as an unsigned short, then compiles will break 
 // because it's as if we're creating ArgTraits twice for unsigned short. Thus...

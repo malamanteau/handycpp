@@ -13,6 +13,9 @@
     <Filter Include="HandyMath\Extended">
       <UniqueIdentifier>{67d5f649-0240-4469-b9f0-36c63feb47dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="tp">
+      <UniqueIdentifier>{0d95144f-f1db-4204-98cb-32c859ec09d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)Handy.hpp">
@@ -82,9 +85,6 @@
       <Filter>HandyMath\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Conversions.hpp">
-      <Filter>HandyMath\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.hpp">
       <Filter>HandyMath\Core</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Matrix3.hpp">
@@ -171,35 +171,61 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\Line2.hpp">
       <Filter>HandyMath\Extended</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\LineClipping.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyCalamity.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyPacket.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandySHA1.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)HandyGuid.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)HandyConsole.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\stb_image.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyArgs.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)HandyMMFile.hpp" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\stb_image.h">
+      <Filter>tp</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyArgs.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyCalamity.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyConsole.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyGuid.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandyMMFile.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandyPacket.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Extended\HandySHA1.hpp">
+      <Filter>Handy</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\LineClipping.hpp">
+      <Filter>HandyMath\Extended</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)HandySmallVector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md">
       <Filter>Handy</Filter>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\span" />
-    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_assert" />
-    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_byte" />
-    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_util" />
-    <None Include="$(MSBuildThisFileDirectory)Docs\HandyMMFile.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.txt">
-      <Filter>HandyMath\Core</Filter>
-    </Text>
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_assert">
+      <Filter>tp</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_byte">
+      <Filter>tp</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_util">
+      <Filter>tp</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\span">
+      <Filter>tp</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Docs\HandyMMFile.md">
+      <Filter>Handy</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="$(MSBuildThisFileDirectory)Hints.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)Handy.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Handy.cpp">
+      <Filter>Handy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

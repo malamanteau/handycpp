@@ -64,6 +64,12 @@ namespace HANDYMATH_NS::Maps
 		return Vector2d(LatLonRadians.Y, -log(tan(LatLonRadians.X * 0.5 + Handy::PiQuarter<double>))) * Handy::RTwoPi<double> +0.5;
 	}
 
+	// Lat Lon are in RADIANS
+	FORCEINLINE Vector2d LatLonDegToT000(Vector2d const & LatLonDegrees)
+	{
+		return LatLonToT000(LatLonDegrees * Handy::PiOver180<double>);
+	}
+	
 	// Convert a distance in meters to normalized mercator units at the given point on Earth (only the y-coord matters).
 	// Be careful with this - it is not perfect and gets especially bad over long distances.
 	FORCEINLINE double MetersToNMUnits(double Meters, double yPos_NM)
@@ -266,4 +272,16 @@ namespace HANDYMATH_NS::Maps
 		double yNM = 1.0 - ((double)(TileY + 1))*2.0 / ((double)tilesOnThisLevel);
 		return NMToT000(Vector2d(xNM, yNM));
 	}
+
+	// Get the XYZ coordinates of the top left most tile for the given xyz given a zoom of z.
+	FORCEINLINE Vector3i XYZ_GivenZ_TL(Vector3i /*byvalue*/ xyz, int32_t z)
+	{
+		if      (z < xyz.Z) xyz /= (1 << (xyz.Z - z));
+		else if (z > xyz.Z) xyz *= (1 << (z - xyz.Z));
+
+		xyz.Z = z;
+
+		return xyz;
+	}
+
 }

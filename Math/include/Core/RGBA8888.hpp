@@ -24,13 +24,18 @@ struct alignas(4) RGBA8888
 	};
 	
 	RGBA8888();
+	RGBA8888(RGBA8888 const & rhs) : UInt(rhs.UInt) { }
 
-	explicit RGBA8888(uint8_t v);
+	explicit RGBA8888(uint32_t v);
 
 	RGBA8888(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
 	~RGBA8888()                             = default;
-	RGBA8888 & operator =(RGBA8888 const &) = default;
+	RGBA8888 & operator =(RGBA8888 const & rhs)
+	{
+		UInt = rhs.UInt;
+		return *this;
+	}
 
 	RGBA8888 Max(RGBA8888 const & v) const;
 	RGBA8888 Min(RGBA8888 const & v) const;
@@ -95,7 +100,7 @@ bool operator !=(RGBA8888 const & lhs, RGBA8888 const & rhs);
 // ---
 
 FORCEINLINE RGBA8888::RGBA8888() : UInt(0u) { }
-FORCEINLINE RGBA8888::RGBA8888(uint8_t v) : R(v), G(v), B(v), A(v) { }
+FORCEINLINE RGBA8888::RGBA8888(uint32_t v) : UInt(v) { }
 FORCEINLINE RGBA8888::RGBA8888(uint8_t r, uint8_t g, uint8_t b, uint8_t a) : R(r), G(g), B(b), A(a) { }
 
 FORCEINLINE RGBA8888 RGBA8888::Max(RGBA8888 const & v) const
@@ -167,4 +172,4 @@ FORCEINLINE /*static*/ RGBA8888 RGBA8888::Gray()         { return RGBA8888(127u,
 
 }
 
-MAKE_HASHABLE(HANDYMATH_NS::RGBA8888, t.R, t.G, t.B, t.A)
+MAKE_HASHABLE(HANDYMATH_NS::RGBA8888, t.UInt)

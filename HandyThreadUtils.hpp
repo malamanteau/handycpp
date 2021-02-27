@@ -58,6 +58,7 @@ namespace HANDY_NS {
 
 	void NameThread(std::thread & t, char const * name);
 	void AssignThreadPriority(std::thread & t, ThreadPriority tp);
+	void AssignCurrentThreadPriority(ThreadPriority tp);
 
 	///-----------------------------------------------
 	/// Threadpool Implementation. 
@@ -590,6 +591,36 @@ namespace HANDY_NS {
 		}
 	};
 	///-----------------------------------------------
+
+	/// From: https://stackoverflow.com/questions/29775153/stopping-long-sleep-threads
+	struct InterruptableSleep
+	{
+		// returns false if killed:
+		template<class R, class P>
+		bool sleep_for(std::chrono::duration<R,P> const & time) const
+		{
+			std::unique_lock<std::mutex> lock(m);
+			return !cv.wait_for(lock, time, [&] { return terminate; });
+		}
+
+		void interrupt()
+		{
+			std::unique_lock<std::mutex> lock(m);
+			terminate = true; // should be modified inside mutex lock
+			cv.notify_all(); // it is safe, and *sometimes* optimal, to do this outside the lock
+		}
+		
+		InterruptableSleep()                                       = default; 
+		InterruptableSleep(InterruptableSleep &&)                  = delete;
+		InterruptableSleep(InterruptableSleep const &)             = delete;
+		InterruptableSleep & operator=(InterruptableSleep &&)      = delete;
+		InterruptableSleep & operator=(InterruptableSleep const &) = delete;
+	private:
+		mutable std::condition_variable cv;
+		mutable std::mutex m;
+		bool terminate = false;
+	};
+
 } // HANDY_NS
 
 

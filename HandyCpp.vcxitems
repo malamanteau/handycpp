@@ -4,6 +4,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
     <ItemsProjectGuid>{13cc4c0a-f2fa-493b-843e-eb220880f87e}</ItemsProjectGuid>
+    <ItemsProjectName>handycpp</ItemsProjectName>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -47,7 +48,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Base.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\BitContinuum.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Conversions.hpp" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Matrix3.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Matrix4.hpp" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Core\Popcount.hpp" />
@@ -83,9 +83,6 @@
     <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\gsl_util" />
     <None Include="$(MSBuildThisFileDirectory)Extended\GSL\include\gsl\span" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)Math\include\Core\Half.txt" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="$(MSBuildThisFileDirectory)Hints.natvis" />

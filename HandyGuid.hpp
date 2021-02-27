@@ -96,6 +96,16 @@ namespace HANDY_NS {
 
 		std::array<uint8_t, 16> Bytes;
 
+		std::string toString() const
+		{
+			return ToString<Handy::EncodingScheme::Hex>();
+		}
+
+		void fromString(std::string_view fromString)
+		{
+			Encoding<Handy::EncodingScheme::Hex>::Decode(Bytes, fromString);
+		}
+
 	private:
 		void zeroify();
 	};

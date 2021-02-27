@@ -156,3 +156,44 @@ void HANDY_NS::AssignThreadPriority(std::thread & t, ThreadPriority tp)
 
 	#endif
 }
+
+void HANDY_NS::AssignCurrentThreadPriority(ThreadPriority tp)
+{
+	#if defined(IS_WINDOWS)
+
+		switch (tp)
+		{
+			case ThreadPriority::Level0_Idle:     SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_IDLE);          break;
+			case ThreadPriority::Level1_Lowest:   SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_LOWEST);        break;
+			case ThreadPriority::Level2_Low:      SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_BELOW_NORMAL);  break;
+			case ThreadPriority::Level3_Normal:   SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_NORMAL);        break;
+			case ThreadPriority::Level4_High:     SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);  break;
+			case ThreadPriority::Level5_Highest:  SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_HIGHEST);       break;
+			case ThreadPriority::Level6_RealTime: SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_TIME_CRITICAL); break;
+		}
+
+	#else
+
+		int min = sched_get_priority_min(SCHED_OTHER);
+		int max = sched_get_priority_max(SCHED_OTHER);
+		int normal = (max    + min) / 2;
+		int low    = (normal + min) / 2;
+		int high   = (normal + max) / 2;
+
+		sched_param sch_params;
+
+		switch (tp)
+		{
+			case ThreadPriority::Level0_Idle:    
+			case ThreadPriority::Level1_Lowest:   sch_params.sched_priority = min;    break;
+			case ThreadPriority::Level2_Low:      sch_params.sched_priority = low;    break;
+			case ThreadPriority::Level3_Normal:   sch_params.sched_priority = normal; break;
+			case ThreadPriority::Level4_High:     sch_params.sched_priority = high;   break;
+			case ThreadPriority::Level5_Highest:  
+			case ThreadPriority::Level6_RealTime: sch_params.sched_priority = max;    break;
+		}
+		if (pthread_setschedparam(pthread_self(), SCHED_OTHER, &sch_params))
+			throw std::runtime_error("Failed to AssignThreadPriority");
+
+	#endif
+}

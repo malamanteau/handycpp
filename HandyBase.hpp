@@ -126,6 +126,12 @@
 
 #pragma once
 
+#if defined _DEBUG && defined _WIN32
+	/// If this is a Windows build with the Debug CRT, include crtdbg.h
+	#include <crtdbg.h>
+	#include <stdlib.h>
+#endif
+
 #include <cstdint>
 #include <tuple>
 #include <algorithm>
@@ -144,6 +150,12 @@ using namespace std::literals::string_literals;
 
 #define STRINGIFY2(x) #x
 #define STRINGIFY(x) STRINGIFY2(x)
+
+#define Breakable for (bool brRegion = true; brRegion; brRegion = false)
+
+//#define CONCAT_IMPL(x, y) x##y
+//#define BREAKABLE_IMPL(x) for (bool CONCAT_IMPL(breakableRegion, x) = true; CONCAT_IMPL(breakableRegion, x); CONCAT_IMPL(breakableRegion, x) = false)
+//#define Breakable BREAKABLE_IMPL(__COUNTER__)
 
 #if !defined __APPLE__ && !defined _WIN32
 	#include <endian.h>

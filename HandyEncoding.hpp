@@ -110,6 +110,7 @@
 
 #include <string>
 #include <cstring>
+#include <iostream>
 
 #include "HandyBase.hpp"
 #include "HandyCompat.hpp"
@@ -210,7 +211,7 @@ namespace HANDY_NS {
 		// https://code.google.com/archive/p/data-shrinker/
 		//   An LZ77-based data compression program that can be used in high performance demand environment, it
 		//   can remove much of the redundancy in data at the speed of hundreds of megabytes per second.
-		Shrinker,
+		Shrinker
 	};
 
 	/// My test file (some json data, 711MB):
@@ -229,8 +230,7 @@ namespace HANDY_NS {
 			#define _CRT_DISABLE_PERFCRIT_LOCKS
 		#endif
 
-		static constexpr uint32_t MB = 1048576;
-		static constexpr uint32_t BLOCK_SIZE = 1 * MB;
+		static constexpr uint32_t BLOCK_SIZE = 1_MiB;
 
 		inline size_t GetTotalUncompressedSize(uint8_t const * src, uint8_t const * srcEnd)
 		{
@@ -280,20 +280,28 @@ namespace HANDY_NS {
 		// out:    outbuf --- compressed data to place in
 		// size:   inbuf size
 		// ******* IMPORTAT *******:
-		// the outbuf's size MUST equal or greater than that of inbuf
+		// "the outbuf's size MUST be equal or greater than that of inbuf"
+		//     NOTE: THIS IS INCORRECT shrinker_compress can write PAST (out + size).
+		//          You WILL foul the heap if you don't have an extra buffer.
+		//              The Shrinker test app adds a buffer of (BLOCK_SIZE >> 6), so the creator 
+		//              probably thought this safe, and seems to jive with my testing (at BLOCK_SIZE of 1MB).
+		//              
+		//
 		// if size < 32 or size >= 128 MB the function will refuse to run and returns -1
 		// return value:
 		//     positive integer means compress success and it's the size of compressed data,
 		//     or -1 means compress failed which mostly means the data is uncompressable
 		inline int shrinker_compress(void *in, void *out, int size)
 		{
-			uint32_t* ht = (uint32_t*)malloc((1 << HASH_BITS)*4);
-			uint8_t *src = (uint8_t*)in, *dst = (uint8_t*)out;
-			uint8_t *src_end = src + size - MINMATCH - 8;
-			uint8_t *dst_end = dst + size - MINMATCH - 8;
-			uint8_t *p_last_lit = src;
-			uint32_t cur_hash, len, match_dist;
-			uint8_t flag, *pflag, cache;
+			uint32_t * ht = (uint32_t*)malloc((1 << HASH_BITS)*4);
+			uint8_t * src = (uint8_t*)in;
+			uint8_t * dst = (uint8_t*)out;
+			uint8_t * src_end = src + size - MINMATCH - 8;
+			uint8_t * dst_end = dst + size - MINMATCH - 8;
+			uint8_t * p_last_lit = src;
+			uint32_t  cur_hash, len, match_dist;
+			uint8_t   flag, cache;
+			uint8_t * pflag;
 
 			if (size < 32 || size > (1 << 27) - 1)
 			{
@@ -318,33 +326,60 @@ namespace HANDY_NS {
 					&& pfind < pcur
 					&& unaligned_load_u32(pfind) == unaligned_load_u32(pcur))
 				{  
-					pfind += 4; pcur += 4;
-					while(LIKELY(pcur < src_end) && unaligned_load_u32(pfind) == unaligned_load_u32(pcur))
-					{ pfind += 4; pcur += 4;}
+					pfind += 4; 
+					pcur  += 4;
+					while (LIKELY(pcur < src_end) && unaligned_load_u32(pfind) == unaligned_load_u32(pcur))
+					{ 
+						pfind += 4; 
+						pcur += 4;
+					}
 					if (LIKELY(pcur < src_end))
-						if (unaligned_load_u16(pfind) == unaligned_load_u16(pcur)) {pfind += 2; pcur += 2;}
-					if (*pfind == *pcur) {pfind++; pcur++;}
+						if (unaligned_load_u16(pfind) == unaligned_load_u16(pcur)) 
+						{
+							pfind += 2; 
+							pcur  += 2;
+						}
+
+					if (*pfind == *pcur) 
+					{
+						pfind++; 
+						pcur++;
+					}
 
 					pflag = dst++;
 					len = (uint32_t)(src - p_last_lit);
-					if (LIKELY(len < 7)) flag = len << 5;
-					else {
+					if (LIKELY(len < 7))
+						flag = len << 5;
+					else
+					{
 						len -= 7;flag = (7<<5);
-						while (len >= 255) { *dst++ = 255;len-= 255;}
+						while (len >= 255)
+						{
+							*dst++ = 255;
+							len-= 255;
+						}
 						*dst++ = len;
 					}
 
 					len = (uint32_t)(pcur - src  - MINMATCH);
-					if (LIKELY(len < 15))  flag |= len;
-					else {
-						len -= 15; flag |= 15;
-						while (len >= 255) { *dst++ = 255;len -= 255;}
+					if (LIKELY(len < 15))
+						flag |= len;
+					else
+					{
+						len  -= 15; 
+						flag |= 15;
+						while (len >= 255)
+						{
+							*dst++ = 255;
+							len   -= 255;
+						}
 						*dst++ = len;
 					}
 					match_dist = (uint32_t)(pcur - pfind - 1);
 					*pflag = flag;
 					*dst++ = match_dist & 0xff;
-					if (match_dist > 0xff) {
+					if (match_dist > 0xff) 
+					{
 						*pflag |= 0x10;
 						*dst++ = match_dist >> 8;
 					}
@@ -368,9 +403,14 @@ namespace HANDY_NS {
 			len = (uint32_t)(src - p_last_lit);
 			if (LIKELY(len < 7)) 
 				flag = len << 5;
-			else {
+			else 
+			{
 				len -= 7; flag = (7<<5);
-				while (len >= 255) { *dst++ = 255; len -= 255;}
+				while (len >= 255)
+				{
+					*dst++ = 255; 
+					len   -= 255;
+				}
 				*dst++ = len;
 			}
 
@@ -380,7 +420,11 @@ namespace HANDY_NS {
 			MEMCPY_NOOVERLAP_NOSURPASS(dst, p_last_lit, src);
 
 			free(ht);
-			if (dst > dst_end) return -1;
+			if (dst > dst_end) 
+			{
+				//std::cout << "Block will not be compressed and exceeded size of source by: " << (size_t)(dst - (dst_end + MINMATCH + 8)) << std::endl;
+				return -1;
+			}
 			else return (int)(dst - (uint8_t*)out);
 		}
 
@@ -400,19 +444,22 @@ namespace HANDY_NS {
 			uint32_t literal_len;
 			uint32_t match_len, match_dist;
 
-			for(;;) {
+			for(;;)
+			{
 				flag = *src++;
 				literal_len = flag >> 5;
 				match_len = flag & 0xf;
 				long_dist = flag & 0x10;
 
-				if (UNLIKELY(literal_len == 7)) {
+				if (UNLIKELY(literal_len == 7))
+				{
 					while((flag = *src++) == 255)
 						literal_len += 255;
 					literal_len += flag;
 				}
 
-				if (UNLIKELY(match_len == 15)) {
+				if (UNLIKELY(match_len == 15))
+				{
 					while((flag = *src++) == 255)
 						match_len += 255;
 					match_len += flag;
@@ -422,20 +469,24 @@ namespace HANDY_NS {
 				if (long_dist) 
 				{
 					match_dist |= ((*src++) << 8);
-					if (UNLIKELY(match_dist == 0xffff)) {
+					if (UNLIKELY(match_dist == 0xffff))
+					{
 						pend = src + literal_len;
-						if (UNLIKELY(dst + literal_len > end)) return -1;
+						if (UNLIKELY(dst + literal_len > end)) 
+							return -1;
 						MEMCPY_NOOVERLAP_NOSURPASS(dst, src, pend);
 						break;
 					}
 				}
 
 				pend = src + literal_len;
-				if (UNLIKELY(dst + literal_len > end)) return -1;
+				if (UNLIKELY(dst + literal_len > end)) 
+					return -1;
 				MEMCPY_NOOVERLAP(dst, src, pend);
 				pcpy = dst - match_dist - 1;
 				pend = pcpy + match_len + MINMATCH;
-				if (UNLIKELY(pcpy < (uint8_t*)out || dst + match_len + MINMATCH > end)) return -1;
+				if (UNLIKELY(pcpy < (uint8_t*)out || dst + match_len + MINMATCH > end))
+					return -1;
 				MEMCPY(dst, pcpy, pend);
 			}
 			return (int)(dst - (uint8_t*)out);
@@ -503,7 +554,7 @@ namespace HANDY_NS {
 			uint8_t const *            srcEnd  = src + srcSpan.size();
 
 			std::vector<uint8_t> outData;
-			outData.resize(srcSpan.size() + 16 * (1 + (srcSpan.size() / detail::BLOCK_SIZE)));
+			outData.resize(srcSpan.size() + 16 * (1 + (srcSpan.size() / detail::BLOCK_SIZE)) + (16_KiB));
 
 			{
 				uint8_t * dst = &outData[0];
@@ -748,7 +799,7 @@ namespace HANDY_NS {
 
 			static const char hex_table[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
-			for (size_t i = 0; i < srcSpan.size(); i++)
+			for (size_t i = 0; i < (size_t)srcSpan.size(); i++)
 			{
 				uint8_t a = src[i];
 				uint8_t lo = a & 0b1111;
@@ -802,7 +853,7 @@ namespace HANDY_NS {
 				255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255
 			};
 
-			for (size_t i = 0; i < srcSpan.size() / 2_szt; i++)
+			for (size_t i = 0; i < (size_t)srcSpan.size() / 2_szt; i++)
 			{
 				uint8_t a = *src++;
 				uint8_t b = *src++;
@@ -881,7 +932,7 @@ namespace HANDY_NS {
 			};
 
 			std::string filteredSrc;
-			for (size_t i = 0; i < srcSpan.size(); i++)
+			for (size_t i = 0; i < (size_t)srcSpan.size(); i++)
 				if (validTable[(size_t)srcSpan.data()[i]])
 					filteredSrc.push_back((char)srcSpan.data()[i]);
 
@@ -920,7 +971,7 @@ namespace HANDY_NS {
 				255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,   255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255
 			};
 
-			for (size_t i = 0; i < srcSpan.size() / 2_szt; i++)
+			for (size_t i = 0; i < (size_t)srcSpan.size() / 2_szt; i++)
 			{
 				uint8_t a = *src++;
 				uint8_t b = *src++;
