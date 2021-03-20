@@ -42,14 +42,14 @@ namespace HANDY_NS {
 		std::string Reason;
 
 		FORCEINLINE Result(bool success)
-			: Success(success),
-			Reason("")
+			: Success(success)
+			, Reason("")
 		{ }
 
 
 		FORCEINLINE Result(bool success, std::string const & reason)
-			: Success(success),
-			Reason(reason)
+			: Success(success)
+			, Reason(reason)
 		{ }
 
 		FORCEINLINE explicit operator bool() const
@@ -61,25 +61,55 @@ namespace HANDY_NS {
 	template <typename EnumOutcomeType>
 	struct ResultE final
 	{
-		static_assert(std::is_enum<EnumOutcomeType>::value, "Compile Error: ResultE usage with non-enum value type.");
+		static_assert(std::is_enum_v<EnumOutcomeType>, "Compile Error: ResultE usage with non-enum value type.");
 
-		EnumOutcomeType Outcome;
+		EnumOutcomeType Value;
 		std::string     Reason;
 
-		ResultE(EnumOutcomeType outcome)
-			: Outcome(outcome),
-			Reason("")
+		explicit ResultE(EnumOutcomeType value)
+			: Value(value)
+			, Reason("")
 		{ }
 
 
-		ResultE(EnumOutcomeType outcome, std::string const & reason)
-			: Outcome(outcome),
+		ResultE(EnumOutcomeType value, std::string const & reason)
+			: Value(value),
 			Reason(reason)
 		{ }
 
 		explicit operator EnumOutcomeType() const
 		{
-			return Outcome;
+			return Value;
+		}
+	};
+
+	template <typename TPtr>
+	struct ResultP final
+	{
+		static_assert(std::is_pointer_v<TPtr>, "Compile Error: ResultP usage with non-pointer value type.");
+
+		TPtr        Value = nullptr;
+		std::string Reason;
+
+		bool Success() const { return Value != nullptr; }
+
+		explicit ResultP(TPtr value)
+			: Value(value)
+			, Reason("")
+		{ }
+
+		ResultP(TPtr value, std::string_view reason)
+			: Value(value)
+			, Reason(reason)
+		{ }
+
+		ResultP(std::string_view reason)
+			: Reason(reason)
+		{ }
+
+		explicit operator TPtr() const
+		{
+			return Value;
 		}
 	};
 
@@ -98,20 +128,20 @@ namespace HANDY_NS {
 		//{ }
 
 		ResultV(bool success, T const & value)
-			: Success(success),
-			Reason(""),
-			OpValue(value)
+			: Success(success)
+			, Reason("")
+			, OpValue(value)
 		{ }
 
 		ResultV(bool success, T && value)
-			: Success(success),
-			Reason(""),
-			OpValue(std::move(value))
+			: Success(success)
+			, Reason("")
+			, OpValue(std::move(value))
 		{ }
 
 		ResultV(bool success, std::string const & reason)
-			: Success(success),
-			Reason(reason)
+			: Success(success)
+			, Reason(reason)
 		{
 			//			if (!success)
 			//				std::cout << "Result failed: " << reason << std::endl;
