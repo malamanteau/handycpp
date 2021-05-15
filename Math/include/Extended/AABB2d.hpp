@@ -119,8 +119,8 @@ namespace HANDYMATH_NS
 			return;
 		}
 
-		AddPoint(Min);
-		AddPoint(Max);
+		AddPoint(aabb.Min);
+		AddPoint(aabb.Max);
 	}
 
 
