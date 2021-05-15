@@ -118,8 +118,8 @@ FORCEINLINE void AABB2::AddAABB(AABB2 const & aabb)
 		return;
 	}
 
-	AddPoint(Min);
-	AddPoint(Max);
+	AddPoint(aabb.Min);
+	AddPoint(aabb.Max);
 }
 
 
