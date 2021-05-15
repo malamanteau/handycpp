@@ -100,8 +100,8 @@ FORCEINLINE void AABB3::AddAABB(AABB3 const & aabb)
 		return;
 	}
 
-	AddPoint(Min);
-	AddPoint(Max);
+	AddPoint(aabb.Min);
+	AddPoint(aabb.Max);
 }
 
 FORCEINLINE bool AABB3::Envelopes(AABB3 const & aabb) const
