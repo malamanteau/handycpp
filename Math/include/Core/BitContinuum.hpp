@@ -10,7 +10,7 @@ namespace HANDYMATH_NS {
 
 	/// Represents an infinite bitfield. Implemented as a vector of blocks.
 	/// While although it represents an infinite bitfield, the number of bytes needed for memory
-	/// is the following: ceil[(highest bit set) / 64] * sizeof(uint64_t)
+	/// is the following: ceil[(highest bit set) / 64] * sizeof(uint64_t) + sizeof(bool)
 	/// 
 	/// This data structure will only grow with time and is DENSE
 	/// 
