@@ -680,6 +680,8 @@ namespace HANDY_NS::Console
 
 	bool Capture(std::ostream &os_)
 	{
+		std::lock_guard<std::mutex> lg(Mutex);
+		
 		std::ostream *os = &os_;
 		if (CapturedStreams.find(os) == CapturedStreams.end())
 		{
@@ -692,6 +694,8 @@ namespace HANDY_NS::Console
 
 	bool Release(std::ostream &os_) 
 	{
+		std::lock_guard<std::mutex> lg(Mutex);
+		
 		std::ostream *os = &os_;
 		if (CapturedStreams.find(os) != CapturedStreams.end())
 		{
