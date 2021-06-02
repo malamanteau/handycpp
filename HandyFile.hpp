@@ -743,7 +743,7 @@ namespace HANDY_NS {
 		uint64_t SizeBytes()           { return m_blocks.size() * BlockSize + (uint64_t)m_partialData.size(); }
 		uint64_t SizeBytesCompressed()
 		{
-			uint64_t sbc;
+			uint64_t sbc = 0;
 			for (CABlock * cab : m_blocks)
 				sbc += cab->CompactSize;
 
