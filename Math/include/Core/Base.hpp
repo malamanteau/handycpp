@@ -71,7 +71,7 @@
 #endif
 
 // Note: Older versions of G++ and possibly Clang do not nest x86intrin.h inclusions properly.
-#if defined IS_GNU || defined IS_CLANG
+#if defined IS_GNU || defined IS_CLANG && ! defined IS_WINDOWS
 	#if !defined USE_SCALAR
 		#include <x86intrin.h>
 	#endif

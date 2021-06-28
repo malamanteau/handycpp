@@ -41,11 +41,13 @@
 #endif
 
 #if defined IS_WINDOWS
-	#include <intrin.h>
-	#pragma intrinsic(_BitScanForward)
-	#pragma intrinsic(_BitScanReverse)
-	#pragma intrinsic(_BitScanForward64)
-	#pragma intrinsic(_BitScanReverse64)
+	#if !defined IS_CLANG
+		#include <intrin.h>
+		#pragma intrinsic(_BitScanForward)
+		#pragma intrinsic(_BitScanReverse)
+		#pragma intrinsic(_BitScanForward64)
+		#pragma intrinsic(_BitScanReverse64)
+	#endif
 #endif
 
 #include "HandyBase.hpp"

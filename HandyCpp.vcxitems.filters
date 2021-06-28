@@ -198,7 +198,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Math\include\Extended\LineClipping.hpp">
       <Filter>HandyMath\Extended</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)HandySmallVector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md">

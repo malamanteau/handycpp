@@ -458,7 +458,15 @@ using namespace std::literals::string_literals;
 		#define LANGUAGE_STRING "C++(VS2005)"
 	#endif
 
-	#if __cplusplus > 201402L
+	#if __cplusplus > 201703L
+		#define GTEQ_CPP20
+		#define GTEQ_CPP17
+		#define GTEQ_CPP14
+		#define GTEQ_CPP11
+		#ifndef LANGUAGE_STRING
+			#define LANGUAGE_STRING "C++20"
+		#endif
+	#elif __cplusplus >= 201703L
 		#define GTEQ_CPP17
 		#define GTEQ_CPP14
 		#define GTEQ_CPP11
@@ -757,7 +765,9 @@ using namespace std::literals::string_literals;
 	#endif
 
 	// Ignore gcc attributes.
-	#define __attribute__(X)
+	#if defined IS_MSVC
+		#define __attribute__(X)
+	#endif
 
 	#if !defined __FUNC__
 		#define __FUNC__ __FUNCTION__ 
@@ -811,17 +821,17 @@ using namespace std::literals::string_literals;
 	//#define __builtin_bswap32 __bswap_constant_32 (x)
 	//#define __builtin_bswap64 __bswap_constant_64 (x)
 
-	#define __bswap_constant_16(x) _byteswap_ushort(x)
-	#define __bswap_constant_32(x) _byteswap_ulong (x)
-	#define __bswap_constant_64(x) _byteswap_uint64(x)
+	//#define __bswap_constant_16(x) _byteswap_ushort(x)
+	//#define __bswap_constant_32(x) _byteswap_ulong (x)
+	//#define __bswap_constant_64(x) _byteswap_uint64(x)
 
-	#define __bswap_16(x) __bswap_constant_16 (x)
-	#define __bswap_32(x) __bswap_constant_32 (x)
-	#define __bswap_64(x) __bswap_constant_64 (x)
+	//#define __bswap_16(x) __bswap_constant_16(x)
+	//#define __bswap_32(x) __bswap_constant_32(x)
+	//#define __bswap_64(x) __bswap_constant_64(x)
 
-	#define __builtin_bswap16 __bswap_constant_16 (x)
-	#define __builtin_bswap32 __bswap_constant_32 (x)
-	#define __builtin_bswap64 __bswap_constant_64 (x)
+	//#define __builtin_bswap16 __bswap_constant_16(x)
+	//#define __builtin_bswap32 __bswap_constant_32(x)
+	//#define __builtin_bswap64 __bswap_constant_64(x)
 
 #endif
 

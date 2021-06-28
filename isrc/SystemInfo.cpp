@@ -58,7 +58,8 @@
 #include <cstdlib>  
 #include <locale>
 #include <codecvt>
-#include <intrin.h>
+#include "../HandyMath.hpp"
+
 #if defined UNICODE
 #define SYSINFO_CSTR_TYPE LPCWSTR
 #else
@@ -161,7 +162,7 @@ namespace HANDY_NS {
 		WCHAR wpath[MAX_PATH];
 		GetModuleFileNameW(hModule, wpath, MAX_PATH);
 		std::wstring wpaths = std::wstring(wpath);
-		return Handy::ToString(wpaths);
+		return std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(wpaths);
 		#else
 		std::string path = "";
 		return std::string(path);
@@ -269,29 +270,33 @@ namespace HANDY_NS {
 
 	void cpuid(int output[4], int functionnumber)
 	{
-		#if defined (_MSC_VER) || defined (__INTEL_COMPILER)    // Microsoft or Intel compiler, intrin.h included
-		__cpuidex(output, functionnumber, 0);               // intrinsic function for CPUID
+		int info_a = 0, info_b = 0, info_c = 0, info_d = 0;
 
-		#elif defined(__GNUC__) || defined(__clang__)           // use inline assembly, Gnu/AT&T syntax
-		int a, b, c, d;
-		__asm("cpuid" : "=a"(a), "=b"(b), "=c"(c), "=d"(d) : "a"(functionnumber), "c"(0) : );
-		output[0] = a;
-		output[1] = b;
-		output[2] = c;
-		output[3] = d;
+		__asm(
 
-		#else                                                   // unknown platform. try inline assembly with masm/intel syntax
-		__asm {
-			mov eax, functionnumber
-			xor ecx, ecx
-			cpuid;
-			mov esi, output
-				mov[esi], eax
-				mov[esi + 4], ebx
-				mov[esi + 8], ecx
-				mov[esi + 12], edx
-		}
-		#endif
+			///* x86-64 uses %rbx as the base register, so preserve it. */
+			#if defined(__x86_64__)
+				"  xchgq %%rbx, %q1 \n"
+			#else
+				"  xchgl %%ebx, %k1 \n"
+			#endif
+
+			"  cpuid\n"
+
+			///* x86-64 uses %rbx as the base register, so preserve it. */
+			#if defined(__x86_64__)
+				"  xchgq %%rbx, %q1 \n"
+			#else
+				"  xchgl %%ebx, %k1 \n"
+			#endif
+
+				: "=a"(info_a), "=r"(info_b), "=c"(info_c), "=d"(info_d)
+				: "a"(functionnumber), "c"(0));
+
+		output[0] = info_a;
+		output[1] = info_b;
+		output[2] = info_c;
+		output[3] = info_d;
 	}
 
 	CPUCapabilities CPUInfo()
