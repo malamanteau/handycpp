@@ -60,7 +60,7 @@ namespace HANDYMATH_NS
 			ret.set_bit(idx);
 		}
 
-		return std::move(ret);
+		return ret;
 	}
 
 	FORCEINLINE float LineSimplification::PointLineDistance(Vector2 point, Vector2 p1, Vector2 p2) 
