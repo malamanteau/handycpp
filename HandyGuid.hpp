@@ -141,7 +141,7 @@ namespace HANDY_NS {
 	{
 		std::string ret;
 		Encoding<SCHEME>::Encode(ret, std::span<std::byte const>(reinterpret_cast<std::byte const *>(&Bytes[0]), 16));
-		return std::move(ret);
+		return ret;
 	}
 
 	// static
