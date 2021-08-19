@@ -589,7 +589,7 @@ namespace HANDY_NS {
 			
 			Handy::WorkPool<BlockInfo *> wp;
 			wp.SetThreadNames("Handy::CompressedAppendFile");
-			wp.SetTask([this](BlockInfo * tb)
+			wp.SetTask([](BlockInfo * tb)
 			{
 				/// This automatically adds size info at the front of the block!
 				Encoding<EncodingScheme::Shrinker>::Encode(tb->CompressedData, std::span<std::byte>(tb->Src, BlockSize));
