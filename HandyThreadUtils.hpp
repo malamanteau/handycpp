@@ -593,32 +593,33 @@ namespace HANDY_NS {
 	///-----------------------------------------------
 
 	/// From: https://stackoverflow.com/questions/29775153/stopping-long-sleep-threads
-	struct InterruptableSleep
+	struct InterruptibleSleep
 	{
 		// returns false if killed:
 		template<class R, class P>
 		bool sleep_for(std::chrono::duration<R,P> const & time) const
 		{
 			std::unique_lock<std::mutex> lock(m);
-			return !cv.wait_for(lock, time, [&] { return terminate; });
+			wake = false;
+			return !cv.wait_for(lock, time, [&] { return wake; });
 		}
 
-		void interrupt()
+		void interrupt() const
 		{
 			std::unique_lock<std::mutex> lock(m);
-			terminate = true; // should be modified inside mutex lock
+			wake = true; // should be modified inside mutex lock
 			cv.notify_all(); // it is safe, and *sometimes* optimal, to do this outside the lock
 		}
 		
-		InterruptableSleep()                                       = default; 
-		InterruptableSleep(InterruptableSleep &&)                  = delete;
-		InterruptableSleep(InterruptableSleep const &)             = delete;
-		InterruptableSleep & operator=(InterruptableSleep &&)      = delete;
-		InterruptableSleep & operator=(InterruptableSleep const &) = delete;
+		InterruptibleSleep()                                       = default; 
+		InterruptibleSleep(InterruptibleSleep &&)                  = delete;
+		InterruptibleSleep(InterruptibleSleep const &)             = delete;
+		InterruptibleSleep & operator=(InterruptibleSleep &&)      = delete;
+		InterruptibleSleep & operator=(InterruptibleSleep const &) = delete;
 	private:
 		mutable std::condition_variable cv;
 		mutable std::mutex m;
-		bool terminate = false;
+		mutable bool wake = false;
 	};
 
 } // HANDY_NS
