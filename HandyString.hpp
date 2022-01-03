@@ -62,6 +62,18 @@ namespace HANDY_NS {
 	///-----------------------------------------------
 
 	inline
+	FCONST bool IsLetterASCII(char c) noexcept
+	{
+		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+	}
+
+	inline
+	FCONST bool IsNumberASCII(char c) noexcept
+	{
+		return c >= '0' && c <= '9';
+	}
+
+	inline
 	bool StringContains(std::string const & str, std::string const & sub)
 	{
 		bool result = str.find(sub) != std::string::npos;
