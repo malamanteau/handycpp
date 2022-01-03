@@ -542,7 +542,7 @@ namespace HANDY_NS::Console
 		bool isNewLine = true;
 		bool firstNewLine = true;
 
-		
+		bool ignoreUntilControlEnd = false;
 
 		std::vector<std::string> split(std::string const & str, char sep)
 		{
@@ -572,9 +572,6 @@ namespace HANDY_NS::Console
 			if (!text.size())
 				return;
 
-			if (Function)
-				Function(text);
-
 			std::vector<std::string> lines = split(text, '\n');
 
 			for (std::vector<std::string>::iterator it = lines.begin(), end = lines.end(); it != end; ++it)
@@ -595,13 +592,52 @@ namespace HANDY_NS::Console
 						<< HANDY_NS::Format("%08.3fs ", fmod(AppStartEpoch.SecondsD(), 10000.)) 
 						<< HC::fgB::gray << "| " << HC::st::pop;
 
+					if (Function)
+					{
+						std::string lineBegin = (firstNewLine ? "" : "\n");
+
+						lineBegin += HANDY_NS::Format("%08.3fs ", fmod(AppStartEpoch.SecondsD(), 10000.)) + "| "s;
+
+						Function(lineBegin);
+					}
+
 					isNewLine = false;
 					firstNewLine = false;
 				}
 
-				for (auto &tag : tags) 
+				for (auto & tag : tags) 
 				{
+					if (Function)
+					{
+						/// We're going to assume ANYTHING with an x1b character is garbage until the first letter (not checking for the [ character)
+
+						std::string noAnsiChars;
+
+						for (char c : tag)
+						{
+							if (ignoreUntilControlEnd)
+							{
+								if (Handy::IsLetterASCII(c))
+									ignoreUntilControlEnd = false;
+
+								continue;
+							}
+
+							if (c == '\x1b')
+							{
+								ignoreUntilControlEnd = true;
+								continue;
+							}
+
+							noAnsiChars.push_back(c);
+						}
+
+						if (!noAnsiChars.empty())
+							Function(noAnsiChars);
+					}
+
 					auto find = HighlightWords.find(tag);
+
 					if (find == HighlightWords.end())
 						ncout << tag;
 					else
@@ -609,6 +645,8 @@ namespace HANDY_NS::Console
 						HC::fgB color = (HC::fgB)find->second;
 						ncout << HC::st::push << color << tag << HC::st::pop;
 					}
+
+
 				}
 			}
 
@@ -618,7 +656,7 @@ namespace HANDY_NS::Console
 		int_type        overflow(int_type c = traits_type::eof())      override { return log(std::string() + (char)(c)), 1; }
 		std::streamsize xsputn  (const char *c_str, std::streamsize n) override { return log(std::string(c_str, (unsigned)n)), n; }
 	};
-
+	
 	struct captured_ostream
 	{
 		std::streambuf *        Original = 0;
