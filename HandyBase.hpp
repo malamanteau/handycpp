@@ -73,7 +73,7 @@
 ///
 /// LICENSE: MIT
 /// 
-/// Copyright (c) 2009-2017 Ignacio Castaño
+/// Copyright (c) 2009-2017 Ignacio CastaÃ±o
 /// Copyright (c) 2007-2009 NVIDIA Corporation
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1290,18 +1290,18 @@ namespace HANDY_NS {
 	{
 		std::string InfoStr;
 		
-		InfoStr += "==========================     Build Info     ===========================\r\n";
-		InfoStr += "Compiler:                " COMPILER_STRING "\r\n";
+		InfoStr += "==========================     Build Info     ===========================\n";
+		InfoStr += "Compiler:                " COMPILER_STRING "\n";
 		InfoStr += "Language:                " LANGUAGE_STRING
 		#ifdef IS_CLI
 			" CLI"
 		#endif
-			                                                   "\r\n";
-		InfoStr += "Target CPU Architecture: " CPU_STRING      "\r\n";
-		InfoStr += "Target Operating System: " OS_STRING       "\r\n";
-		InfoStr += "Target Endianness:       " ENDIAN_STRING   "\r\n";
-		InfoStr += "Built:                   " __DATE__ " @ " __TIME__ "\r\n";
-		InfoStr += "=========================================================================\r\n";
+		                                                       "\n";
+		InfoStr += "Target CPU Architecture: " CPU_STRING      "\n";
+		InfoStr += "Target Operating System: " OS_STRING       "\n";
+		InfoStr += "Target Endianness:       " ENDIAN_STRING   "\n";
+		InfoStr += "Built:                   " __DATE__ " @ " __TIME__ "\n";
+		InfoStr += "=========================================================================\n";
 		return InfoStr;
 	}
 
