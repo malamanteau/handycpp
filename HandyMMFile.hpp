@@ -78,7 +78,7 @@ namespace HANDY_NS {
 		void open(char const * pathname,
 				  FileExistsMode         exists_mode = FileExistsMode::if_exists_fail,
 				  FileNotExistMode doesnt_exist_mode = FileNotExistMode::if_doesnt_exist_create);
-		char * data() { return data_; }
+		char * data() const { return data_; }
 		void map(size_t offset = 0, size_t size = 0);
 		bool flush();
 	};

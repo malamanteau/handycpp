@@ -230,7 +230,7 @@ namespace HANDY_NS {
 			#define _CRT_DISABLE_PERFCRIT_LOCKS
 		#endif
 
-		static constexpr uint32_t BLOCK_SIZE = 1_MiB;
+		static constexpr uint32_t BLOCK_SIZE = (uint32_t)1_MiB;
 
 		inline size_t GetTotalUncompressedSize(uint8_t const * src, uint8_t const * srcEnd)
 		{
@@ -1710,6 +1710,13 @@ namespace HANDY_NS {
 			return true;
 		}
 	};
+
+	template <typename TDst, typename TSrc>
+	FORCEINLINE bool Copy(TDst & dDst, TSrc const & dSrc)
+	{
+		return Handy::Encoding<Handy::EncodingScheme::Raw>::Encode(dDst, dSrc);
+	}
+
 }
 
 //void encoding_test()

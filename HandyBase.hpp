@@ -73,7 +73,7 @@
 ///
 /// LICENSE: MIT
 /// 
-/// Copyright (c) 2009-2017 Ignacio CastaÃ±o
+/// Copyright (c) 2009-2017 Ignacio Castaño
 /// Copyright (c) 2007-2009 NVIDIA Corporation
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -458,15 +458,7 @@ using namespace std::literals::string_literals;
 		#define LANGUAGE_STRING "C++(VS2005)"
 	#endif
 
-	#if __cplusplus > 201703L
-		#define GTEQ_CPP20
-		#define GTEQ_CPP17
-		#define GTEQ_CPP14
-		#define GTEQ_CPP11
-		#ifndef LANGUAGE_STRING
-			#define LANGUAGE_STRING "C++20"
-		#endif
-	#elif __cplusplus >= 201703L
+	#if __cplusplus > 201402L
 		#define GTEQ_CPP17
 		#define GTEQ_CPP14
 		#define GTEQ_CPP11
@@ -758,16 +750,15 @@ using namespace std::literals::string_literals;
 	#endif
 
 	#define chdir _chdir
-	#define getcwd _getcwd 
-
+	#if !defined getcwd
+		#define getcwd _getcwd 
+	#endif
 	#if _MSC_VER < 1800 // Not sure what version introduced this.
 		#define va_copy(a, b) (a) = (b)
 	#endif
 
 	// Ignore gcc attributes.
-	#if defined IS_MSVC
-		#define __attribute__(X)
-	#endif
+	#define __attribute__(X)
 
 	#if !defined __FUNC__
 		#define __FUNC__ __FUNCTION__ 
@@ -821,17 +812,17 @@ using namespace std::literals::string_literals;
 	//#define __builtin_bswap32 __bswap_constant_32 (x)
 	//#define __builtin_bswap64 __bswap_constant_64 (x)
 
-	//#define __bswap_constant_16(x) _byteswap_ushort(x)
-	//#define __bswap_constant_32(x) _byteswap_ulong (x)
-	//#define __bswap_constant_64(x) _byteswap_uint64(x)
+	#define __bswap_constant_16(x) _byteswap_ushort(x)
+	#define __bswap_constant_32(x) _byteswap_ulong (x)
+	#define __bswap_constant_64(x) _byteswap_uint64(x)
 
-	//#define __bswap_16(x) __bswap_constant_16(x)
-	//#define __bswap_32(x) __bswap_constant_32(x)
-	//#define __bswap_64(x) __bswap_constant_64(x)
+	#define __bswap_16(x) __bswap_constant_16 (x)
+	#define __bswap_32(x) __bswap_constant_32 (x)
+	#define __bswap_64(x) __bswap_constant_64 (x)
 
-	//#define __builtin_bswap16 __bswap_constant_16(x)
-	//#define __builtin_bswap32 __bswap_constant_32(x)
-	//#define __builtin_bswap64 __bswap_constant_64(x)
+	#define __builtin_bswap16 __bswap_constant_16 (x)
+	#define __builtin_bswap32 __bswap_constant_32 (x)
+	#define __builtin_bswap64 __bswap_constant_64 (x)
 
 #endif
 
@@ -1250,6 +1241,10 @@ namespace std {
 
 namespace HANDY_NS {
 
+	/// Forces a cast from rvalue to lvalue.
+	template<class T> T & unmove(T && t) { return t; } 
+
+
 	/// Byte swap an integer, auto sized.
 	template <typename T>
 	FORCEINLINE static T bswapi(T t)
@@ -1296,7 +1291,7 @@ namespace HANDY_NS {
 		#ifdef IS_CLI
 			" CLI"
 		#endif
-		                                                       "\n";
+			                                                   "\n";
 		InfoStr += "Target CPU Architecture: " CPU_STRING      "\n";
 		InfoStr += "Target Operating System: " OS_STRING       "\n";
 		InfoStr += "Target Endianness:       " ENDIAN_STRING   "\n";
@@ -1623,50 +1618,80 @@ namespace HANDY_NS {
 
 	enum class EasingFunction : uint32_t
 	{
+		// Input:              0.0 0.25 0.50 0.75 1.0
+		// ------------------------------------------
+		// RAMP_INC            0.0 0.25 0.50 0.75 1.0
+		// SINE_INV_QUARTER    0.0 0.38 0.71 0.92 1.0
+		// SINE_INV_HALF_MID   0.0 0.35 0.50 0.65 1.0
+		// SMOOTHSTEP_INC      0.0 0.16 0.50 0.84 1.0
+		// SINE_QUARTER        0.0 0.08 0.29 0.62 1.0
+		// 
+		// SINE_HALF           0.0 0.29 1.00 1.71 2.0
+		//
+		// SINE_INV_HALF       0.0 0.71 1.00 0.71 0.0
+		// SINE_FULL           0.0 0.50 1.00 0.50 0.0
+		// RAMP_FULL           0.0 0.50 1.00 0.50 0.0
+		// SMOOTHSTEP          0.0 0.50 1.00 0.50 0.0
+
+
+		//   /
+		//  / 
+		// /
+		// 
+		RAMP_INC = 0,
 
 		//    .-- 
-		//   / 
-		SINE_INV_QUARTER = 0,
-
-		//    .--. 
-		//   /    \      .
-		SINE_INV_HALF,
+		//   /
+		//  /
+		// 
+		SINE_INV_QUARTER,
 
 		//        /
 		//   .---' 
 		//  /
+		// 
 		SINE_INV_HALF_MID,
 
-		//     /
-		//  --'
+		// Google it.
+		SMOOTHSTEP_INC,
+
+		//      /
+		//     .
+		//  -'*
+		// 
 		SINE_QUARTER,
 
 		//      .--
 		//     /
-		//  --' 
+		//  --'
+		//
 		SINE_HALF,
+
+
+		//    .--. 
+		//   /    \      .
+		//  /      \     .
+		//
+		SINE_INV_HALF,
 
 		//      .--. 
 		//     /    \        .
 		//  _.'      '._
+		// 
 		SINE_FULL,
 
 		//    .
 		//   / \      .
 		//  /   \     .
 		// /     \    .
+		// 
 		RAMP_FULL,
 
-		//   /
-		//  / 
-		// /  
-		RAMP_INC,
 
 		// Google it.
 		SMOOTHSTEP,
 
-		// Google it.
-		SMOOTHSTEP_INC
+
 	};
 
 

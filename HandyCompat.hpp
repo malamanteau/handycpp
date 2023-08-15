@@ -58,7 +58,7 @@ using namespace std::literals;
 		#endif
 	#elif defined(_MSC_VER)
 		//Some versions of VS have <filesystem> also, but that gives you the "Microsoft-specific implementation" instead of the C++ standard version
-		#if defined GTEQ_CPP17 || (defined _MSVC_LANG && _MSVC_LANG >= 201700L)
+		#if defined _MSVC_LANG && _MSVC_LANG >= 201700L
 			#include <filesystem>
 		#else
 			#include <experimental/filesystem>
@@ -86,7 +86,7 @@ using namespace std::literals;
 /// Everything below here is just to make sure <span> (or a substitute) is included, and that it works in unordered collections.
 
 
-#if __has_include(<span>) && defined GTEQ_CPP20
+#if __has_include(<span>)
 	#include <span>	
 #else
 	#include "Extended/GSL/include/gsl/span"

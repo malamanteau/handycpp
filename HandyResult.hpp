@@ -38,8 +38,10 @@ namespace HANDY_NS {
 
 	struct Result final
 	{
-		bool Success;
+		bool Success = false;
 		std::string Reason;
+
+		Result() = default;
 
 		FORCEINLINE Result(bool success)
 			: Success(success)
@@ -56,6 +58,13 @@ namespace HANDY_NS {
 		{
 			return Success;
 		}
+
+		template <class SerialOp> void serial(SerialOp & ser)
+		{
+			ser.saveonly("_type", "Result");
+			ser("Success", Success);
+			ser("Reason", Reason);
+		}
 	};
 
 	template <typename EnumOutcomeType>
@@ -63,39 +72,40 @@ namespace HANDY_NS {
 	{
 		static_assert(std::is_enum_v<EnumOutcomeType>, "Compile Error: ResultE usage with non-enum value type.");
 
-		EnumOutcomeType Value;
+		EnumOutcomeType State;
 		std::string     Reason;
 
-		explicit ResultE(EnumOutcomeType value)
-			: Value(value)
+		/*explicit*/ ResultE(EnumOutcomeType state)
+			: State(state)
 			, Reason("")
 		{ }
 
-
-		ResultE(EnumOutcomeType value, std::string const & reason)
-			: Value(value),
-			Reason(reason)
+		ResultE(EnumOutcomeType state, std::string const & reason)
+			: State(state)
+			, Reason(reason)
 		{ }
 
 		explicit operator EnumOutcomeType() const
 		{
-			return Value;
+			return State;
 		}
 	};
 
+	
 	template <typename TPtr>
 	struct ResultP final
 	{
+
 		static_assert(std::is_pointer_v<TPtr>, "Compile Error: ResultP usage with non-pointer value type.");
 
+		/// TODO This should be TPtr* w/o the static_assert.
 		TPtr        Value = nullptr;
 		std::string Reason;
 
 		bool Success() const { return Value != nullptr; }
 
-		explicit ResultP(TPtr value)
+		/*explicit */ResultP(TPtr value)
 			: Value(value)
-			, Reason("")
 		{ }
 
 		ResultP(TPtr value, std::string_view reason)
@@ -113,10 +123,41 @@ namespace HANDY_NS {
 		}
 	};
 
+	template <typename TPtr, typename EnumOutcomeType>
+	struct ResultPE final
+	{
+		static_assert(std::is_enum_v<EnumOutcomeType>, "Compile Error: ResultPE usage with non-enum value type.");
+
+		TPtr *          Value = nullptr;
+		EnumOutcomeType State;
+		std::string     Reason;
+
+		ResultPE(TPtr * value, EnumOutcomeType state, std::string_view reason)
+			: Value(value)
+			, State(state)
+			, Reason(reason)
+		{ }
+
+		/*explicit */ResultPE(EnumOutcomeType state)
+			: State(state)
+		{ }
+
+		ResultPE(EnumOutcomeType state, std::string const & reason)
+			: State(state)
+			, Reason(reason)
+		{ }
+
+		ResultPE(TPtr * value, EnumOutcomeType state)
+			: Value(value)
+			, State(state)
+		{ }
+	};
+
+
 	template <typename T>
 	struct ResultV final
 	{
-		bool Success;
+		bool Success = false;
 		std::string Reason;
 		std::optional<T> OpValue;
 
@@ -145,6 +186,42 @@ namespace HANDY_NS {
 		{
 			//			if (!success)
 			//				std::cout << "Result failed: " << reason << std::endl;
+		}
+
+		explicit operator bool() const
+		{
+			return Success;
+		}
+	};
+
+
+
+
+
+	struct ResultS final
+	{
+		bool Success = false;
+		std::string Reason;
+		std::optional<std::string> OpValue;
+
+		ResultS(bool success, std::string var)
+			: Success(success)
+			, Reason("")
+		{
+			if (Success)
+				OpValue = var;
+			else
+				Reason = var;
+		}
+
+		ResultS(bool success)
+			: Success(success)
+			, Reason("")
+		{ }
+
+		std::string Value()
+		{
+			return OpValue.has_value() ? OpValue.value() : "";
 		}
 
 		explicit operator bool() const

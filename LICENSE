@@ -210,7 +210,7 @@
 ///
 ///	SystemInfo Library
 /// https://github.com/poli0048/SystemInfo
-/// and Mapping functions: "Math/include/Extended/Maps.hpp"
+/// and Mapping functions: "Math/Extended/Maps.hpp"
 ///
 /// Copyright (c) 2017 Sentek Systems, LLC.
 ///

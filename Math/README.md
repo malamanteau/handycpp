@@ -1785,15 +1785,3 @@ int32_t Popcount(uint32_t num)
 ```
 </details>
 
-<details><summary>half type</summary>
-
-```
-A "half" floating point type is added globally. It looks and acts like a normal float:
-half a = 1.1_h;
-half b = 2.2_h;
-half c = a + b;
-The implementation can be found here, for further info: http://half.sourceforge.net
-Note that the half type is not faster than a regular float, just more compact.
-```
-</details>
-

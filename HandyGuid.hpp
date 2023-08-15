@@ -141,7 +141,7 @@ namespace HANDY_NS {
 	{
 		std::string ret;
 		Encoding<SCHEME>::Encode(ret, std::span<std::byte const>(reinterpret_cast<std::byte const *>(&Bytes[0]), 16));
-		return ret;
+		return std::move(ret);
 	}
 
 	// static
@@ -161,7 +161,7 @@ namespace HANDY_NS {
 	{
 		Guid ret;
 		Encoding<SCHEME>::Decode(ret.Bytes, fromString);
-		return ret;
+		return std::move(ret);
 	}
 
 	FORCEINLINE Guid::Guid() : Bytes{ {0} } { } // create empty guid

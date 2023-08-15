@@ -172,6 +172,32 @@ namespace HANDY_NS {
 			return newJobToken;
 		}
 
+		//functionally equivalent to WaitJob(AddJob(job))
+		void AddWaitJob(const std::function<void()> & job)
+		{
+			WaitJob(AddJob(job));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			/// FIXME: WaitJob does not work as expected. This is a dumb hack, and will not have ideal performance.
+			Wait();
+		}
+
 		// Add a new job to the pool. If there are no jobs in the queue, a thread is woken up to take the job. 
 		// If all threads are busy, the job is added to the front of the queue.
 		// Returns a token that can be used to refer to this job in the future (e.g. to remove it from the queue)
@@ -191,6 +217,12 @@ namespace HANDY_NS {
 			return newJobToken;
 		}
 
+		//functionally equivalent to WaitJob(AddJobToFront(job))
+		void AddWaitJobToFront(const std::function<void()> & job)
+		{
+			WaitJob(AddJobToFront(job));
+		}
+
 		//Try to remove a job with the given token from the job queue. If the job is not found (including if it is currently executing), this does nothing.
 		//Returns true if the job was found and removed and false otherwise.
 		bool RemoveJob(uint64_t JobToken)
@@ -198,7 +230,8 @@ namespace HANDY_NS {
 			bool JobRemoved = false;
 			{
 				std::lock_guard<std::mutex> lock(m_queueMutex);
-				for (auto iter = m_queue.begin(); iter != m_queue.end(); iter++) {
+				for (auto iter = m_queue.begin(); iter != m_queue.end(); iter++)
+				{
 					if (std::get<1>(*iter) == JobToken) {
 						//We found the job - remove it
 						m_queue.erase(iter); //iter is now invalid
@@ -215,8 +248,8 @@ namespace HANDY_NS {
 			//No need to notify threads since this never adds work; it can only remove a job
 			return JobRemoved;
 		}
-		
-		//Remove all jobs currently enqueued. This does not effect any jobs that are already underway.
+
+		//Remove all jobs currently enqueued. This does not affect any jobs that are already underway.
 		void ClearJobQueue()
 		{
 			//One subtlety: Worker threads can remove a job from the queue and decrement m_jobsLeft later (they are locked with different mutexes).
@@ -293,6 +326,23 @@ namespace HANDY_NS {
 			}
 
 			return m_jobsLeft == 0;
+		}
+
+		//Wait for a job to finish, don't call this if you have a huge number of jobs. It just does a linear search for your ID every time a job is completed.
+		void WaitJob(uint64_t JobToken)
+		{
+			std::unique_lock<std::mutex> lock(m_queueMutex);
+			if (m_jobsLeft > 0)
+			{
+				m_waitVar.wait(lock, [this, JobToken]
+				{
+					for (auto iter = m_queue.begin(); iter != m_queue.end(); iter++)
+						if (std::get<1>(*iter) == JobToken)
+							return false; //We found the job
+
+					return true;
+				});
+			}
 		}
 
 		// Get the number of jobs left in the queue.
@@ -427,6 +477,12 @@ namespace HANDY_NS {
 			m_jobAvailableVar.notify_one();
 			return newJobToken;
 		}
+		
+		//functionally equivalent to WaitJob(AddJob(job))
+		void AddWaitJob(T job)
+		{
+			WaitJob(AddJob(job));
+		}
 
 		// Add a new job to the pool. If there are no jobs in the queue, a thread is woken up to take the job. 
 		// If all threads are busy, the job is added to the front of the queue.
@@ -445,6 +501,12 @@ namespace HANDY_NS {
 			}
 			m_jobAvailableVar.notify_one();
 			return newJobToken;
+		}
+
+		//functionally equivalent to WaitJob(AddJobToFront(job))
+		void AddWaitJobToFront(T job)
+		{
+			WaitJob(AddJobToFront(job));
 		}
 
 		//Try to remove a job with the given token from the job queue. If the job is not found (including if it is currently executing), this does nothing.
@@ -575,7 +637,24 @@ namespace HANDY_NS {
 
 			return m_jobsLeft == 0;
 		}
-		
+
+		//Wait for a job to finish, don't call this if you have a huge number of jobs. It just does a linear search for your ID every time a job is completed.
+		void WaitJob(uint64_t JobToken)
+		{
+			std::unique_lock<std::mutex> lock(m_queueMutex);
+			if (m_jobsLeft > 0)
+			{
+				m_waitVar.wait(lock, [this, JobToken]
+				{
+					for (auto iter = m_queue.begin(); iter != m_queue.end(); iter++)
+						if (std::get<1>(*iter) == JobToken)
+							return false; //We found the job
+
+					return true;
+				});
+			}
+		}
+
 		// Get the number of jobs left in the queue.
 		size_t JobsRemaining()
 		{
