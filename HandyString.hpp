@@ -227,19 +227,19 @@ namespace HANDY_NS {
 	#if defined IS_WINDOWS
 	#pragma warning(push)
 	#pragma warning(disable : 4996)
-		//inline
-		//std::wstring ToWString(std::string const & str)
-		//{
-		//	std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converterX;
-		//	return converterX.from_bytes(str);
-		//}
+		inline
+		std::wstring ToWString(std::string const & str)
+		{
+			std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converterX;
+			return converterX.from_bytes(str);
+		}
 
-		//inline
-		//std::string ToString(std::wstring const & wstr)
-		//{
-		//	std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converterX;
-		//	return converterX.to_bytes(wstr);
-		//}
+		inline
+		std::string ToString(std::wstring const & wstr)
+		{
+			std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converterX;
+			return converterX.to_bytes(wstr);
+		}
 	#pragma warning(pop) 
 
 	#endif

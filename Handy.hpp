@@ -9,16 +9,17 @@
 #include "HandyMemory.hpp"
 #include "HandyPIMPL.hpp"
 #include "HandyConsole.hpp"
-#include "isrc/SystemInfo.hpp"
 #include "HandyRange.hpp"
 #include "HandyResult.hpp"
 #include "HandySerDe.hpp"
 #include "HandyFile.hpp"
 #include "HandyMMFile.hpp"
 #include "HandyString.hpp"
+#include "HandySystemInfo.hpp"
 #include "HandyThreadUtils.hpp"
 #include "HandyTryGet.hpp"
 #include "HandyUtils.hpp"
+
 #if !defined HANDY_NO_DEQUE
 	#include "HandyDeque.hpp"
 #endif

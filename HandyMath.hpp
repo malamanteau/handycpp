@@ -3,6 +3,6 @@
 
 #pragma once
 
-#include "Math/include/Core.hpp"
-#include "Math/include/Extended.hpp"
+#include "Math/Core.hpp"
+#include "Math/Extended.hpp"
 
